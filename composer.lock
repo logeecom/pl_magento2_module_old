@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:logeecom/pl_module_core.git",
-              "reference": "d92e6b18b0385826cdfe34b1af9a1644461d8237"
+                "reference": "bc82832151f1123d0c371078d264932b59e8328d"
             },
             "dist": {
                 "type": "zip",
-              "url": "https://api.github.com/repos/logeecom/pl_module_core/zipball/d92e6b18b0385826cdfe34b1af9a1644461d8237",
-              "reference": "d92e6b18b0385826cdfe34b1af9a1644461d8237",
+                "url": "https://api.github.com/repos/logeecom/pl_module_core/zipball/bc82832151f1123d0c371078d264932b59e8328d",
+                "reference": "bc82832151f1123d0c371078d264932b59e8328d",
                 "shasum": ""
             },
             "require": {
@@ -47,7 +47,7 @@
                 "proprietary"
             ],
             "description": "Packlink integrations core library",
-          "time": "2019-05-21T13:22:37+00:00"
+            "time": "2019-05-23T10:06:19+00:00"
         },
         {
             "name": "zendframework/zend-memory",
