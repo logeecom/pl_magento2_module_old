@@ -16,8 +16,8 @@ Magento 2 module can be installed with [Composer](https://getcomposer.org/downlo
 If module is not available on the Magento Marketplace, module location can be set
 in the `composer.json` file of the Magento root. This can be done by running a command:
 ```bash
-composer config repositories.repo-name vcs https://github.com/logeecom/pl_module_core
-composer config repositories.repo-name vcs https://github.com/logeecom/pl_magento2_module
+composer config repositories.packlink-core vcs https://github.com/logeecom/pl_module_core
+composer config repositories.packlink-magento2 vcs https://github.com/logeecom/pl_magento2_module
 ```
 
 If this is done successfully, module can be added with this command:
