@@ -7,11 +7,9 @@
 
 namespace Packlink\Script;
 
-use Composer\Script\Event;
-
 class Core
 {
-    public static function postComposer(Event $event)
+    public static function postComposer()
     {
         self::fixAndCopyDirectory('src', 'IntegrationCore');
         self::fixAndCopyDirectory('tests', 'IntegrationCore/Tests');

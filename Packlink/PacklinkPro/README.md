@@ -2,6 +2,8 @@
 
 # Packlink Magento 2 plugin
 
+Please read this document thoroughly in order to prepare for the correct installation.
+ 
 ## Installation instructions
 Plugin can be installed directly from Magento 2 Marketplace.
 
@@ -12,18 +14,17 @@ For composer installation you will need your Magento marketplace credentials.
 Check [user guide](https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html) 
 for information on obtaining them.
 
-Magento 2 module can be installed with [Composer](https://getcomposer.org/download/).
-If module is not available on the Magento Marketplace, module location can be set
-in the `composer.json` file of the Magento root. This can be done by running a command:
-```bash
-composer config repositories.packlink-core vcs https://github.com/logeecom/pl_module_core
-composer config repositories.packlink-magento2 vcs https://github.com/logeecom/pl_magento2_module
-```
-
-If this is done successfully, module can be added with this command:
+Magento 2 module can be installed with Composer. Go to your Magento installation root folder and type this.
 ```bash
 composer require packlink/magento2
 ```
+
+Composer should automatically find the module in Magento Marketplace and install it. 
+Next, module should be enabled with:
+```bash
+php bin/magento setup:upgrade
+```
+After installation is over, Packlink configuration can be accessed with _Sales > Packlink PRO_ menu.
 
 ### Manual installation
 To manually install the extension, follow these steps:
@@ -34,24 +35,18 @@ upload Packlink folder to your Magento shop `app/code/` directory
 
 **Step 2:** Disable the cache in admin panel under _System > Cache Management_
 
-**Step 3:** Enter the following at the command line as magento console user (upgrade database):
+**Step 3:** Now module has to be enabled and Magento recompiled in order to include the module.
 ```bash
 php bin/magento setup:upgrade
-```
-
-**Step 4:** Enter the following at the command line (generate dependency map):
-```bash
 php bin/magento setup:di:compile
 ```
 
-**Step 5:** Enter the following at the command line (deploy static content):
+**Step 4:** In case of Magento version less than 2.3, static content needs to be deployed with this command:
 ```bash
 php bin/magento setup:static-content:deploy
 ```
-**Step 6:** Optionally you might need to fix permissions on your Magento files if
+**Step 5:** Optionally you might need to fix permissions on your Magento files if
 the previous steps were ran as a `root` or other non-magento console user
-
-**Step 7:** After opening _Stores > Configuration > Advanced > Advanced_, the module will be shown in the admin panel
 
 After installation is over, Packlink configuration can be accessed with _Sales > Packlink PRO_ menu.
 
@@ -78,7 +73,7 @@ php bin/magento module:disable Packlink_PacklinkPro
 rm -rf app/code/Packlink
 ```
 
-**Step 3:** Delete module data from database:
+**Step 3:** Delete module data from database (you will need the access to the database):
 ```sql
 DELETE FROM `setup_module` WHERE `module` = 'Packlink_PacklinkPro';
 DROP TABLE `packlink_entity`;
