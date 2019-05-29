@@ -282,9 +282,8 @@ class OrderRepositoryService implements OrderRepository
     /**
      * Sets order packlink shipment tracking history to an order by shipment reference.
      *
-     * @param string $shipmentReference Packlink shipment reference.
+     * @param Shipment $shipment Packlink shipment details.
      * @param Tracking[] $trackingHistory Shipment tracking history.
-     * @param Shipment $shipmentDetails Packlink shipment details.
      *
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Packlink\PacklinkPro\IntegrationCore\BusinessLogic\Order\Exceptions\OrderNotFound When order with
@@ -292,9 +291,9 @@ class OrderRepositoryService implements OrderRepository
      * @throws \Packlink\PacklinkPro\IntegrationCore\Infrastructure\ORM\Exceptions\QueryFilterInvalidParamException
      * @throws \Packlink\PacklinkPro\IntegrationCore\Infrastructure\ORM\Exceptions\RepositoryNotRegisteredException
      */
-    public function updateTrackingInfo($shipmentReference, array $trackingHistory, Shipment $shipmentDetails)
+    public function updateTrackingInfo(Shipment $shipment, array $trackingHistory)
     {
-        $orderDetails = $this->getOrderDetailsByReference($shipmentReference);
+        $orderDetails = $this->getOrderDetailsByReference($shipment->reference);
 
         if (!empty($trackingHistory)) {
             $trackingHistory = $this->sortTrackingRecords($trackingHistory);
@@ -302,8 +301,8 @@ class OrderRepositoryService implements OrderRepository
             $orderDetails->setShippingStatus($latestTrackingRecord->description, $latestTrackingRecord->timestamp);
         }
 
-        if ($shipmentDetails !== null) {
-            $this->setShipmentDetails($orderDetails, $shipmentDetails);
+        if ($shipment !== null) {
+            $this->setShipmentDetails($orderDetails, $shipment);
         }
 
         $this->getOrderDetailsRepository()->update($orderDetails);
@@ -376,6 +375,25 @@ class OrderRepositoryService implements OrderRepository
         $orderDetails = $this->getOrderDetailsByReference($shipmentReference);
         $orderDetails->setPacklinkShippingPrice($price);
         $this->getOrderDetailsRepository()->update($orderDetails);
+    }
+
+    /**
+     * Returns whether shipment identified by provided reference has Packlink shipment label set.
+     *
+     * @param string $shipmentReference Packlink shipment reference.
+     *
+     * @return bool Returns TRUE if label is set; otherwise, FALSE.
+     *
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Packlink\PacklinkPro\IntegrationCore\BusinessLogic\Order\Exceptions\OrderNotFound
+     * @throws \Packlink\PacklinkPro\IntegrationCore\Infrastructure\ORM\Exceptions\QueryFilterInvalidParamException
+     * @throws \Packlink\PacklinkPro\IntegrationCore\Infrastructure\ORM\Exceptions\RepositoryNotRegisteredException
+     */
+    public function isLabelSet($shipmentReference)
+    {
+        $details = $this->getOrderDetailsByReference($shipmentReference);
+
+        return $details !== null && count($details->getShipmentLabels()) > 0;
     }
 
     /**

@@ -8,23 +8,22 @@
     "packages": [
         {
             "name": "packlink/integration-core",
-            "version": "1.0.0",
+          "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:logeecom/pl_module_core.git",
-                "reference": "3aebc0bd40145abf1537370c5e8f85cacdd37d36"
+              "reference": "fbdbed7df2c33715d6b07227dce3cb772a05150d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/logeecom/pl_module_core/zipball/3aebc0bd40145abf1537370c5e8f85cacdd37d36",
-                "reference": "3aebc0bd40145abf1537370c5e8f85cacdd37d36",
+              "url": "https://api.github.com/repos/logeecom/pl_module_core/zipball/fbdbed7df2c33715d6b07227dce3cb772a05150d",
+              "reference": "fbdbed7df2c33715d6b07227dce3cb772a05150d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3",
-                "zendframework/zend-memory": "2.0.3",
-                "zendframework/zend-stdlib": "2.0.3",
-                "zendframework/zendpdf": "2.0.*@dev"
+              "zendframework/zend-stdlib": "^2.0",
+              "zendframework/zendpdf": "^2.0"
             },
             "require-dev": {
                 "codacy/coverage": "dev-master",
@@ -47,7 +46,7 @@
                 "proprietary"
             ],
             "description": "Packlink integrations core library",
-            "time": "2019-05-24T08:57:31+00:00"
+          "time": "2019-05-29T15:03:53+00:00"
         },
         {
             "name": "zendframework/zend-memory",
