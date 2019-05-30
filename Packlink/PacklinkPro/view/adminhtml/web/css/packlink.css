@@ -402,8 +402,7 @@
 }
 
 .pl-table-row-arrow-wrapper {
-    padding-right: 0 !important;
-    width: 80px !important;
+    width: 40px !important;
 }
 
 .pl-table-row-arrow svg {
