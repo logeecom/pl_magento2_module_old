@@ -116,4 +116,35 @@ class ConfigurationService extends Configuration
     {
         return 'module_magento';
     }
+
+    /**
+     * Gets the current version of the module/integration.
+     *
+     * @return string The version number.
+     */
+    public function getModuleVersion()
+    {
+        return json_decode(file_get_contents('Packlink/PacklinkPro/composer.json'), true)['version'];
+    }
+
+    /**
+     * Gets the name of the integrated e-commerce system.
+     * This name is related to Packlink API which can be different from the official system name.
+     *
+     * @return string The e-commerce name.
+     */
+    public function getECommerceName()
+    {
+        return 'magento';
+    }
+
+    /**
+     * Gets the current version of the integrated e-commerce system.
+     *
+     * @return string The version number.
+     */
+    public function getECommerceVersion()
+    {
+        return '';
+    }
 }
