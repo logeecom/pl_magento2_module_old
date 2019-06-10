@@ -7,6 +7,7 @@
 
 namespace Packlink\PacklinkPro\Services\BusinessLogic;
 
+use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Packlink\PacklinkPro\Helper\UrlHelper;
 use Packlink\PacklinkPro\IntegrationCore\BusinessLogic\Configuration;
@@ -24,31 +25,38 @@ class ConfigurationService extends Configuration
      * @var static
      */
     protected static $instance;
-
     /**
      * Magento store manager interface.
      *
      * @var StoreManagerInterface
      */
     private $storeManager;
-
     /**
      * UrlHelper helper class.
      *
      * @var UrlHelper
      */
     private $urlHelper;
+    /**
+     * @var \Magento\Framework\App\ProductMetadataInterface
+     */
+    private $productMetadata;
 
     /**
      * ConfigurationService constructor.
      *
+     * @param \Magento\Framework\App\ProductMetadataInterface $productMetadata
      * @param StoreManagerInterface $storeManager Magento store manager interface.
      * @param UrlHelper $urlHelper Url helper.
      */
-    public function __construct(StoreManagerInterface $storeManager, UrlHelper $urlHelper)
-    {
+    public function __construct(
+        ProductMetadataInterface $productMetadata,
+        StoreManagerInterface $storeManager,
+        UrlHelper $urlHelper
+    ) {
         parent::__construct();
 
+        $this->productMetadata = $productMetadata;
         $this->storeManager = $storeManager;
         $this->urlHelper = $urlHelper;
 
@@ -124,7 +132,7 @@ class ConfigurationService extends Configuration
      */
     public function getModuleVersion()
     {
-        return json_decode(file_get_contents('Packlink/PacklinkPro/composer.json'), true)['version'];
+        return json_decode(file_get_contents(__DIR__ . '/../../composer.json'), true)['version'];
     }
 
     /**
@@ -145,6 +153,6 @@ class ConfigurationService extends Configuration
      */
     public function getECommerceVersion()
     {
-        return '';
+        return $this->productMetadata->getVersion();
     }
 }
